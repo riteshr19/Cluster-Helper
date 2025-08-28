@@ -1,0 +1,10 @@
+systemd-python>=234
+psutil>=5.8.0
+numpy>=1.21.0
+pynvml>=11.4.1
+
+# Development dependencies
+pytest>=6.2.0
+pytest-mock>=3.6.0
+flake8>=4.0.0
+mypy>=0.950
