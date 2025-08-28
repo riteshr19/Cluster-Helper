@@ -1,0 +1,38 @@
+[Unit]
+Description=Cluster-Helper GPU SLO Controller
+Documentation=https://github.com/riteshr19/Cluster-Helper
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/gpu-controller
+User=root
+Group=root
+Restart=on-failure
+RestartSec=5
+
+# Security settings
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/run/tenant_metrics /sys/fs/cgroup
+
+# Environment
+Environment=PYTHONUNBUFFERED=1
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cluster-helper
+
+# Resource limits
+MemoryMax=512M
+CPUQuota=50%
+
+# Capabilities needed for cgroup and system access
+CapabilityBoundingSet=CAP_SYS_ADMIN CAP_DAC_OVERRIDE
+AmbientCapabilities=CAP_SYS_ADMIN CAP_DAC_OVERRIDE
+
+[Install]
+WantedBy=multi-user.target
